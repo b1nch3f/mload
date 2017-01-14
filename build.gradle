@@ -1,0 +1,52 @@
+plugins {
+    id 'edu.sc.seis.launch4j' version '2.1.0'
+}
+
+apply plugin: 'java'
+
+sourceCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+// NetBeans will automatically add "run" and "debug" tasks relying on the
+// "mainClass" property. You may however define the property prior executing
+// tasks by passing a "-PmainClass=<QUALIFIED_CLASS_NAME>" argument.
+//
+// Note however, that you may define your own "run" and "debug" task if you
+// prefer. In this case NetBeans will not add these tasks but you may rely on
+// your own implementation.
+if (!hasProperty('mainClass')) {
+    ext.mainClass = 'com.main.Main'
+}
+
+repositories {
+    mavenCentral()
+    // You may define additional repositories, or even remove "mavenCentral()".
+    // Read more about repositories here:
+    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
+}
+
+dependencies {
+    // TODO: Add dependencies here ...
+    // https://mvnrepository.com/artifact/com.opencsv/opencsv
+    compile group: 'com.opencsv', name: 'opencsv', version: '3.8'
+
+    // https://mvnrepository.com/artifact/com.force.api/force-wsc
+    compile group: 'com.force.api', name: 'force-wsc', version: '38.0.4'
+
+    // https://mvnrepository.com/artifact/com.force.api/force-partner-api
+    compile group: 'com.force.api', name: 'force-partner-api', version: '38.0.0'
+
+    // https://mvnrepository.com/artifact/com.force.api/force-metadata-api
+    compile group: 'com.force.api', name: 'force-metadata-api', version: '38.0.0'
+     
+    // You can read more about how to add dependency here:
+    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
+    testCompile group: 'junit', name: 'junit', version: '4.10'
+}
+
+//icon = "icons/myAppFast.ico"
+launch4j {
+    outfile = 'Main.exe'
+    mainClassName = 'com.main.Main'
+    productName = 'Main'
+}

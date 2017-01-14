@@ -1,0 +1,27 @@
+Copyright 2016 the original author or authors.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+# Custom Metadata Loader
+### Gradle build automation using launch4j to perform Jar to win32 executable format
+### JARs from Maven Repository -> https://mvnrepository.com/artifact/com.force.api
+#### I'm using JDK 32-bit even when i'm on 64-bit win 10. 
+#### GUI development is under Netbeans IDE
+
+#### A Java project to perform full-curd operations on custom metadata type
+
+* 1/10/2017 - custom metadata single record upsert operation successful
+* 1/11/2017 - process csv to perform bulk upsert
+* 1/12/2017 - remove hardcoding of credentials and allow user to login with username-password
+* 1/12/2017 - improve csv processing to provide API names from csv headers
+* 1/12/2017 - created credentialsManger bean for session management
+* 1/13/2017 - project supports gradle build
+* 1/14/2017 - updated project to JavaFX UI
+* todo - object name selection to be a drop-down
+* todo - allow user to login via various kinds of urls
+* todo - validate csv headers with actual API names using metadata describe
+* any suggestions ?
