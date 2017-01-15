@@ -10,7 +10,6 @@
 package com.util;
 
 import com.sforce.soap.metadata.*;
-import com.sforce.soap.metadata.Error;
 import java.util.ArrayList;
 
 /**
