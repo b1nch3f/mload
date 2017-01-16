@@ -21,7 +21,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 * 1/12/2017 - created credentialsManger bean for session management
 * 1/13/2017 - project supports gradle build
 * 1/14/2017 - updated project to JavaFX UI
-* todo - object name selection to be a drop-down
+* 1/17/2017 - object name selection to be a drop-down
+* todo - remove linting errors from LandingPageUIController
 * todo - allow user to login via various kinds of urls
 * todo - validate csv headers with actual API names using metadata describe
 * any suggestions ?

@@ -10,15 +10,40 @@
 package com.util;
 
 import com.sforce.soap.metadata.*;
+import com.sforce.ws.ConnectionException;
 import java.util.ArrayList;
 
 /**
  * Metadata API Util Class
  */
 public class CustomMetadataUtil {
-    private MetadataConnection metadataConnection;
-
-    public static String run(String objectname, ArrayList<String> header, ArrayList<ArrayList<String>> data) throws Exception {
+    public static ArrayList<String> listCustomMetadata() {
+        MetadataConnection metadataConnection = CredentialsManager.mdConnection;
+        ArrayList<String> customMetadataList = null;
+        try {
+          ListMetadataQuery query = new ListMetadataQuery();
+          query.setType("CustomObject");
+          //query.setFolder(null);
+          double asOfVersion = 38.0;
+          // Assuming that the SOAP binding has already been established.
+          FileProperties[] lmr = metadataConnection.listMetadata(
+              new ListMetadataQuery[] {query}, asOfVersion);
+          if (lmr != null) {
+              customMetadataList = new ArrayList<>();
+            for (FileProperties n : lmr) {
+                if(n.toString().contains("_mdt")) {
+                    customMetadataList.add(n.getFullName().replace("__mdt", "").trim());
+                }
+            }
+          }            
+        } catch (ConnectionException ce) {
+          ce.printStackTrace();
+        }
+        
+        return customMetadataList;
+    }
+    
+    public static Boolean upsertCustomMetadata(String objectname, ArrayList<String> header, ArrayList<ArrayList<String>> data) throws Exception {
         MetadataConnection metadataConnection = CredentialsManager.mdConnection;
         Metadata [] records = new Metadata[data.size()];
                 
@@ -32,7 +57,7 @@ public class CustomMetadataUtil {
             cm.setFullName(fullName);
             cm.setLabel(label);
 
-            ArrayList<CustomMetadataValue> fieldValues = new ArrayList<CustomMetadataValue>();
+            ArrayList<CustomMetadataValue> fieldValues = new ArrayList<>();
             
             for(int var = 2; var <= header.size() - 1; ++var) {
                 CustomMetadataValue fieldVal = new CustomMetadataValue();
@@ -56,10 +81,10 @@ public class CustomMetadataUtil {
 
         for (UpsertResult r : results) {
             if (r.isSuccess()) {
-                return "Success !";
+                return true;
             }
         }
         
-        return "Error";
+        return false;
     }
 }

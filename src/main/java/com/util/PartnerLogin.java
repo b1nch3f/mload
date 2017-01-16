@@ -25,7 +25,6 @@ public class PartnerLogin {
         final String PASSWORD = pass; 
         final String URL = "https://login.salesforce.com/services/Soap/u/38.0";
         final LoginResult loginResult = loginToSalesforce(USERNAME, PASSWORD, URL);
-        System.out.println(loginResult);
         CredentialsManager.mdConnection = createMetadataConnection(loginResult);
         CredentialsManager.fullUserName = loginResult.getUserInfo().getUserFullName();
         return CredentialsManager.fullUserName;

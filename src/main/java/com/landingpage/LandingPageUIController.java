@@ -29,11 +29,13 @@ import java.util.logging.Logger;
 import com.opencsv.CSVReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import com.util.CredentialsManager;
 import com.util.CustomMetadataUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 
 /**
  * FXML Controller class
@@ -54,70 +56,78 @@ public class LandingPageUIController implements Initializable {
     private Label welcomeLabel;
     
     @FXML
-    private TextField objectNameTextField;
-    
-    @FXML
     private Button selectFileButton;
     
     @FXML
     private Button uploadButton;
     
     @FXML
+    private ComboBox objectNameComboBox;
+    
+    @FXML
+    private Label msgLabel;
+    
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         if(CredentialsManager.fullUserName.trim().length() != 0 ) {
             welcomeLabel.setText("Welcome "+CredentialsManager.fullUserName);
+            
+            ObservableList<String> options = 
+            FXCollections.observableArrayList(
+                CustomMetadataUtil.listCustomMetadata()
+            );
+            
+            objectNameComboBox.getItems().addAll(options);
+        } else {
+            objectNameComboBox.getItems().add((String)"--NONE--");
         }
         
-        selectFileButton.setOnAction(
-        new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent event) {
-                if(CredentialsManager.mdConnection == null) {
-                    try {
-                        Parent p = FXMLLoader.load(getClass().getResource("/com/login/Login.fxml"));
-                        Scene scene = new Scene(p);
-                        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        appStage.setScene(scene);
-                        appStage.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(LandingPageUIController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else if(CredentialsManager.mdConnection != null) {
-                    Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    File file = fileChooser.showOpenDialog(appStage);
-                    if (file != null) {
-                        filePath = file.getAbsolutePath();
-                        System.out.println(filePath);
-                    } else {
-                        System.out.println("File access cancelled by user.");
-                    }
-                }
-            }
-        });
-        
-        uploadButton.setOnAction((event) -> {
-            if(CredentialsManager.mdConnection == null) {
+        selectFileButton.setOnAction((final ActionEvent event) -> {
+            if (CredentialsManager.mdConnection == null) {
                 try {
-                    Parent p = FXMLLoader.load(getClass().getResource("/com/login/Login.fxml"));
+                    Parent p = FXMLLoader.load(LandingPageUIController.this.getClass().getResource("/com/login/Login.fxml"));
                     Scene scene = new Scene(p);
                     Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     appStage.setScene(scene);
                     appStage.show();
-                } catch (IOException ex) {
+                }catch (IOException ex) {
+                    Logger.getLogger(LandingPageUIController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if(CredentialsManager.mdConnection != null) {
+                Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                File file = fileChooser.showOpenDialog(appStage);
+                if (file != null) {
+                    filePath = file.getAbsolutePath();
+                    System.out.println(filePath);
+                } else {
+                    msgLabel.setText("File access cancelled by user.");
+                }
+            }
+        });
+        
+        uploadButton.setOnAction((ActionEvent event) -> {
+            if (CredentialsManager.mdConnection == null) {
+                try {
+                    Parent p = FXMLLoader.load(LandingPageUIController.this.getClass().getResource("/com/login/Login.fxml"));
+                    Scene scene = new Scene(p);
+                    Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    appStage.setScene(scene);
+                    appStage.show();
+                }catch (IOException ex) {
                     Logger.getLogger(LandingPageUIController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else if(CredentialsManager.mdConnection != null && filePath != null) {
                 System.out.println(filePath);
                 String csvFile = filePath;
-                ArrayList<String> header = new ArrayList<String>();
-                ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
-
+                ArrayList<String> header = new ArrayList<>();
+                ArrayList<ArrayList<String>> data = new ArrayList<>();
+                
                 try {
                     CSVReader reader = new CSVReader(new FileReader(csvFile));
                     String[] line;
                     while ((line = reader.readNext()) != null) {
-                        ArrayList<String> body = new ArrayList<String>();
-
+                        ArrayList<String> body = new ArrayList<>();
+                        
                         if(init == 0) {
                             header.addAll(Arrays.asList(line));
                             init += 1;
@@ -125,26 +135,34 @@ public class LandingPageUIController implements Initializable {
                         } else {
                             body.addAll(Arrays.asList(line));
                         }
-
+                        
                         data.add(body);
                     }
-                    System.out.println(data);
-
-                    objectNameText = objectNameTextField.getText();
-
-                    String result = "";
+                    //System.out.println(data);
+                    init = 0;
+                    
+                    objectNameText = (String) objectNameComboBox.getValue();
+                    
+                    Boolean result = false;
                     try {
-                        result = CustomMetadataUtil.run(objectNameText, header, data);
+                        if(objectNameText != null) {
+                            result = CustomMetadataUtil.upsertCustomMetadata(objectNameText, header, data);
+                            if(result) {
+                                msgLabel.setText("Upload Success!");
+                            }
+                        } else {
+                            msgLabel.setText("Please select a custom metadata type");
+                        }
                     } catch (Exception e) {
                         System.out.println(e);
                     }
-                    //msgTest.setText(result);
                     System.out.println(result);
-
+                    
                 } catch (IOException e) {
+                    System.out.println(e);
                 }
             } else if(CredentialsManager.mdConnection != null && filePath == null) {
-                System.out.println("Please select a csv file to proceed");
+                msgLabel.setText("Please select a csv file to proceed");
             }
         });
     }
