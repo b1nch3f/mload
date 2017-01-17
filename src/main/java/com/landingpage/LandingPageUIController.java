@@ -13,11 +13,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -29,10 +26,10 @@ import java.util.logging.Logger;
 import com.opencsv.CSVReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import com.util.CredentialsManager;
 import com.util.CustomMetadataUtil;
+import com.util.Router;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -42,7 +39,7 @@ import javafx.scene.control.ComboBox;
  *
  * @author sangram
  */
-public class LandingPageUIController implements Initializable {
+public class LandingPageUIController extends Router implements Initializable {
     public static String filePath = null;
     public static int init = 0;
     public static String objectNameText = "";
@@ -85,12 +82,9 @@ public class LandingPageUIController implements Initializable {
         selectFileButton.setOnAction((final ActionEvent event) -> {
             if (CredentialsManager.mdConnection == null) {
                 try {
-                    Parent p = FXMLLoader.load(LandingPageUIController.this.getClass().getResource("/com/login/Login.fxml"));
-                    Scene scene = new Scene(p);
-                    Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    appStage.setScene(scene);
-                    appStage.show();
-                }catch (IOException ex) {
+                    String path = routes.get("login");
+                    goTo(event, path);
+                } catch (Exception ex) {
                     Logger.getLogger(LandingPageUIController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else if(CredentialsManager.mdConnection != null) {
@@ -98,7 +92,6 @@ public class LandingPageUIController implements Initializable {
                 File file = fileChooser.showOpenDialog(appStage);
                 if (file != null) {
                     filePath = file.getAbsolutePath();
-                    System.out.println(filePath);
                 } else {
                     msgLabel.setText("File access cancelled by user.");
                 }
@@ -108,12 +101,9 @@ public class LandingPageUIController implements Initializable {
         uploadButton.setOnAction((ActionEvent event) -> {
             if (CredentialsManager.mdConnection == null) {
                 try {
-                    Parent p = FXMLLoader.load(LandingPageUIController.this.getClass().getResource("/com/login/Login.fxml"));
-                    Scene scene = new Scene(p);
-                    Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    appStage.setScene(scene);
-                    appStage.show();
-                }catch (IOException ex) {
+                    String path = routes.get("login");
+                    goTo(event, path);
+                }catch (Exception ex) {
                     Logger.getLogger(LandingPageUIController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else if(CredentialsManager.mdConnection != null && filePath != null) {
@@ -138,7 +128,6 @@ public class LandingPageUIController implements Initializable {
                         
                         data.add(body);
                     }
-                    //System.out.println(data);
                     init = 0;
                     
                     objectNameText = (String) objectNameComboBox.getValue();
@@ -156,7 +145,6 @@ public class LandingPageUIController implements Initializable {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
-                    System.out.println(result);
                     
                 } catch (IOException e) {
                     System.out.println(e);
