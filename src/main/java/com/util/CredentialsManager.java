@@ -19,5 +19,6 @@ public class CredentialsManager {
     public static String userNameText = "";
     public static String passwordText = "";
     public static String fullUserName = "";
+    public static String serverURL = "";
     public static MetadataConnection mdConnection = null;
 }

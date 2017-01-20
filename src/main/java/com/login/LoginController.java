@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -44,25 +45,40 @@ public class LoginController extends Router implements Initializable {
     @FXML
     private PasswordField userpasswordPasswordField;
     
+    @FXML
+    private TextField serverURLTextField;
+    
+    @FXML
+    private Label msgLabel;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loginButton.setOnAction((ActionEvent event) -> {
-            CredentialsManager.userNameText = usernameTextField.getText();
-            CredentialsManager.passwordText = userpasswordPasswordField.getText();
-            try {
-                PartnerLogin.login(CredentialsManager.userNameText, CredentialsManager.passwordText);
-                if(CredentialsManager.fullUserName.trim().length() != 0 ) {
-                    try {
-                        String path = routes.get("default");
-                        goTo(event, path);
-                    } catch (Exception ex) {
-                        Logger.getLogger(LandingPageUIController.class.getName()).log(Level.SEVERE, null, ex);
+            if(usernameTextField.getText().trim().length() == 0) {
+                msgLabel.setText("Please enter the username");
+            } else if(userpasswordPasswordField.getText().trim().length() == 0) {
+                msgLabel.setText("Please enter the password");
+            } else if(serverURLTextField.getText().trim().length() == 0) {
+                msgLabel.setText("Please enter the server URL");
+            } else {
+                CredentialsManager.userNameText = usernameTextField.getText();
+                CredentialsManager.passwordText = userpasswordPasswordField.getText();
+                CredentialsManager.serverURL = serverURLTextField.getText();
+                try {
+                    PartnerLogin.login(CredentialsManager.userNameText, CredentialsManager.passwordText, CredentialsManager.serverURL);
+                    if(CredentialsManager.fullUserName.trim().length() != 0 ) {
+                        try {
+                            String path = routes.get("default");
+                            goTo(event, path);
+                        } catch (Exception ex) {
+                            Logger.getLogger(LandingPageUIController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        msgLabel.setText("Login failed");
                     }
-                } else {
-                    System.out.println("Login failed");
+                } catch(ConnectionException e) {
+                    System.out.println(e.getMessage());
                 }
-            } catch(ConnectionException e) {
-                System.out.println(e.getMessage());
             }
         });
     }   

@@ -30,9 +30,12 @@ import javafx.stage.FileChooser;
 import com.util.CredentialsManager;
 import com.util.CustomMetadataUtil;
 import com.util.Router;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -75,6 +78,7 @@ public class LandingPageUIController extends Router implements Initializable {
             );
             
             objectNameComboBox.getItems().addAll(options);
+
         } else {
             objectNameComboBox.getItems().add((String)"--NONE--");
         }
@@ -128,6 +132,7 @@ public class LandingPageUIController extends Router implements Initializable {
                         
                         data.add(body);
                     }
+                    reader.close();
                     init = 0;
                     
                     objectNameText = (String) objectNameComboBox.getValue();
@@ -145,6 +150,7 @@ public class LandingPageUIController extends Router implements Initializable {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
+                    System.out.println(result);
                     
                 } catch (IOException e) {
                     System.out.println(e);

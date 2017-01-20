@@ -13,9 +13,9 @@
     <children>
       <Label fx:id="welcomeLabel" layoutX="382.0" layoutY="14.0" />
       <Button fx:id="selectFileButton" layoutX="242.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Select CSV File" />
-      <Button fx:id="uploadButton" layoutX="242.0" layoutY="270.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Upload" />
+      <Button fx:id="uploadButton" layoutX="243.0" layoutY="270.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Upload" />
       <Label layoutX="160.0" layoutY="185.0" text="ObjectName" />
       <ComboBox fx:id="objectNameComboBox" layoutX="241.0" layoutY="181.0" prefWidth="150.0" />
-      <Label fx:id="msgLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="193.0" layoutY="330.0" prefHeight="17.0" prefWidth="246.0" textAlignment="JUSTIFY" />
+      <Label fx:id="msgLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="194.0" layoutY="332.0" prefHeight="17.0" prefWidth="246.0" textAlignment="JUSTIFY" />
    </children>
 </AnchorPane>

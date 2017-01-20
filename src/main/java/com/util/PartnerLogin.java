@@ -20,10 +20,10 @@ import com.sforce.ws.ConnectorConfig;
  */
 public class PartnerLogin {
 
-    public static String login(String uname, String pass) throws ConnectionException {
+    public static String login(String uname, String pass, String url) throws ConnectionException {
         final String USERNAME = uname;
         final String PASSWORD = pass; 
-        final String URL = "https://login.salesforce.com/services/Soap/u/38.0";
+        final String URL = url+"/services/Soap/u/38.0";
         final LoginResult loginResult = loginToSalesforce(USERNAME, PASSWORD, URL);
         CredentialsManager.mdConnection = createMetadataConnection(loginResult);
         CredentialsManager.fullUserName = loginResult.getUserInfo().getUserFullName();
