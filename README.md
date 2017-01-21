@@ -7,12 +7,8 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 # A Salesforce Custom Metadata Loader
-### Gradle build automation using launch4j to perform Jar to win32 executable format
-### JARs from Maven Repository -> https://mvnrepository.com/artifact/com.force.api
-#### I'm using JDK 32-bit even when i'm on 64-bit win 10. 
-#### GUI development is under Netbeans IDE
 
-#### A Java project to perform full-curd operations on custom metadata type
+#### A Java project to perform full-CRUD operations on custom metadata type
 
 * 1/10/2017 - custom metadata single record upsert operation successful
 * 1/11/2017 - process csv to perform bulk upsert
@@ -35,5 +31,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #### STEP 3 -> Add JAVA_HOME environment variable to point to JDK directory and GRADLE_HOME to point to gradle directory and JDK/bin, Gradle/bin directory to Path varialbe
 #### STEP 4 -> clone/download this reporsitory
 #### STEP 5 -> switch to the downloaded directory
-#### STEP 6 -> open command prompt and type gradle createExe
-#### STEP 7 -> the .exe will be generated inside the build/launch4j folder
+#### STEP 6 -> open command prompt and type gradle fatJar
+#### STEP 7 -> the executable Jar will be generated inside the $project/build/libs/ folder
