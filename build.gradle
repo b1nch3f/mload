@@ -34,20 +34,11 @@ repositories {
 }
 
 dependencies {
-    // TODO: Add dependencies here ...
-    // https://mvnrepository.com/artifact/com.opencsv/opencsv
     compile group: 'com.opencsv', name: 'opencsv', version: '3.8'
-
-    // https://mvnrepository.com/artifact/com.force.api/force-wsc
     compile group: 'com.force.api', name: 'force-wsc', version: '38.0.4'
-
-    // https://mvnrepository.com/artifact/com.force.api/force-partner-api
     compile group: 'com.force.api', name: 'force-partner-api', version: '38.0.0'
-
-    // https://mvnrepository.com/artifact/com.force.api/force-metadata-api
     compile group: 'com.force.api', name: 'force-metadata-api', version: '38.0.0'
      
-    // You can read more about how to add dependency here:
-    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
-    testCompile group: 'junit', name: 'junit', version: '4.10'
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.mockito:mockito-core:1.9.+'
 }

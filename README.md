@@ -17,7 +17,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 * 1/12/2017 - created credentialsManger bean for session management
 * 1/13/2017 - project supports gradle build
 * 1/14/2017 - updated project to JavaFX UI
-* 1/17/2017 - object name selection to be a drop-down
+* 1/17/2017 - custom metadata name selection to be a drop-down
 * 1/21/2017 - allow user to login via server url
 * 1/21/2017 - allow user to have columns in any order in the csv file
 * 1/22/2017 - supported single Jar/cross-platform executable build using fatJar
