@@ -26,6 +26,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 * 1/21/2017 - allow user to have columns in any order in the csv file
 * todo - remove linting errors from LandingPageUIController
 * todo - validate csv headers with actual API names using metadata describe
+* todo - support delete feature
 * any suggestions ?
 
 # Steps to build the app
