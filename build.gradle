@@ -44,9 +44,8 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.10'
 }
 
-//icon = "icons/myAppFast.ico"
 launch4j {
-    outfile = 'Main.exe'
+    outfile = 'mLoad.exe'
     mainClassName = 'com.main.Main'
-    productName = 'Main'
+    productName = 'mLoad'
 }

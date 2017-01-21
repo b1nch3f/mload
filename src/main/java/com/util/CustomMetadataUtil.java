@@ -14,7 +14,9 @@ import com.sforce.ws.ConnectionException;
 import java.util.ArrayList;
 
 /**
+ * @author sangram kesari ray
  * Metadata API Util Class
+ * 
  */
 public class CustomMetadataUtil {
     public static ArrayList<String> listCustomMetadata() {
@@ -49,38 +51,44 @@ public class CustomMetadataUtil {
             ArrayList<ArrayList<String>> data) throws Exception {
         MetadataConnection metadataConnection = CredentialsManager.mdConnection;
         Metadata [] records = new Metadata[data.size()];
-                
+        int count = 0;        
         for(int index = 0; index < data.size(); ++index) {
             ArrayList<String> item = data.get(index);
+            
             // MeetupApiKey
-            String fullName = objectname+"."+item.get(0);
-            String label = item.get(1);
-
             CustomMetadata cm = new CustomMetadata();
-            cm.setFullName(fullName);
-            cm.setLabel(label);
-
+            String fullName = "";
+            String label = "";
+            
             ArrayList<CustomMetadataValue> fieldValues = new ArrayList<>();
             
-            for(int var = 2; var <= header.size() - 1; ++var) {
-                CustomMetadataValue fieldVal = new CustomMetadataValue();
-                fieldVal.setField(header.get(var));
-                fieldVal.setValue(item.get(var));
-                fieldValues.add(fieldVal);
-            }
+            for(int i = 0; i < header.size(); i++) {
+                if(header.get(i).equalsIgnoreCase("DeveloperName")) {
+                    fullName = objectname+"."+item.get(i);
+                    cm.setFullName(fullName);
+                } else if(header.get(i).equalsIgnoreCase("Label")) {
+                    label = item.get(i);
+                    cm.setLabel(label);
+                } else {
+                    CustomMetadataValue fieldVal = new CustomMetadataValue();
+                    fieldVal.setField(header.get(i));
+                    fieldVal.setValue(item.get(i));
 
+                    fieldValues.add(fieldVal);
+                }
+            }
+            
             CustomMetadataValue values[] = new CustomMetadataValue [fieldValues.size()];
             
-            for(int v = 0; v < fieldValues.size(); ++v) {
+            for(int v = 0; v < fieldValues.size(); v++) {
                 values[v] = fieldValues.get(v);
             }
-
+            
             cm.setValues(values);
-            records[index] = cm;
+            records[count++] = cm;
         }
 
-        UpsertResult[] results = metadataConnection
-                .upsertMetadata(records);
+        UpsertResult[] results = metadataConnection.upsertMetadata(records);
 
         for (UpsertResult r : results) {
             if (r.isSuccess()) {

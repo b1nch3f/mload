@@ -22,8 +22,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 * 1/13/2017 - project supports gradle build
 * 1/14/2017 - updated project to JavaFX UI
 * 1/17/2017 - object name selection to be a drop-down
+* 1/21/2017 - allow user to login via server url
+* 1/21/2017 - allow user to have columns in any order in the csv file
 * todo - remove linting errors from LandingPageUIController
-* todo - allow user to login via various kinds of urls
 * todo - validate csv headers with actual API names using metadata describe
 * any suggestions ?
 

@@ -16,6 +16,7 @@ import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
 
 /**
+ * @author sangram kesari ray
  * Login utility.
  */
 public class PartnerLogin {

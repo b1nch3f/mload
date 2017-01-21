@@ -13,7 +13,7 @@ import com.sforce.soap.metadata.MetadataConnection;
 
 /**
  *
- * @author sangram.kesari.ray
+ * @author sangram kesari ray
  */
 public class CredentialsManager {
     public static String userNameText = "";

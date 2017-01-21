@@ -30,17 +30,14 @@ import javafx.stage.FileChooser;
 import com.util.CredentialsManager;
 import com.util.CustomMetadataUtil;
 import com.util.Router;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
- * @author sangram
+ * @author sangram kesari ray
  */
 public class LandingPageUIController extends Router implements Initializable {
     public static String filePath = null;
@@ -111,7 +108,6 @@ public class LandingPageUIController extends Router implements Initializable {
                     Logger.getLogger(LandingPageUIController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else if(CredentialsManager.mdConnection != null && filePath != null) {
-                System.out.println(filePath);
                 String csvFile = filePath;
                 ArrayList<String> header = new ArrayList<>();
                 ArrayList<ArrayList<String>> data = new ArrayList<>();
@@ -150,7 +146,6 @@ public class LandingPageUIController extends Router implements Initializable {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
-                    System.out.println(result);
                     
                 } catch (IOException e) {
                     System.out.println(e);
