@@ -6,9 +6,9 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-# A Salesforce Custom Metadata Loader
+# mLoad
 
-#### A Java project to perform full-CRUD operations on custom metadata type
+#### A Java project to upload custom metadata types to Salesforce 
 
 * 1/10/2017 - custom metadata single record upsert operation successful
 * 1/11/2017 - process csv to perform bulk upsert
@@ -20,12 +20,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 * 1/17/2017 - object name selection to be a drop-down
 * 1/21/2017 - allow user to login via server url
 * 1/21/2017 - allow user to have columns in any order in the csv file
+* 1/22/2017 - supported single Jar/cross-platform executable build using fatJar
+* toto - NSIS support for windows
 * todo - remove linting errors from LandingPageUIController
-* todo - validate csv headers and remove hardcoding of DeveloperName and Label attribute with actual API names using metadata describe
+* todo - validate csv headers using metadata describe
 * todo - support delete feature
 * any suggestions ?
 
-# Steps to build the app
+# Steps to build and run the app
 #### STEP 1 -> Install JDK // I used 32 bit JDK, even when on on 64bit Win 10 machine
 #### STEP 2 -> Download Gradle.zip and extract // I used 32 bit, even when on on 64bit Win 10 machine
 #### STEP 3 -> Add JAVA_HOME environment variable to point to JDK directory and GRADLE_HOME to point to gradle directory and JDK/bin, Gradle/bin directory to Path varialbe
