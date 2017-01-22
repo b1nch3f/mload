@@ -29,3 +29,12 @@
 #### STEP 5 -> switch to the downloaded directory
 #### STEP 6 -> open command prompt and type gradle fatJar
 #### STEP 7 -> the executable Jar will be generated inside the $project/build/libs/ folder
+
+# Example CSV structure you want to have
+
+| ApiKey__c | Label | Email__c           | Username__c | DeveloperName |
+|-----------|-------|--------------------|-------------|---------------|
+| A1001     | 1     | max@developer1.com | max1        | X1            |
+| A1002     | 2     | max@developer2.com | max2        | X2            |
+
+* Note - DeveloperName and Label are mandatory fields in the CSV file. Other fields also can be mandatory if they are required fields in the Salesforce instance/org.
