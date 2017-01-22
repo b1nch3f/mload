@@ -30,7 +30,7 @@
 #### STEP 6 -> open command prompt and type gradle fatJar
 #### STEP 7 -> the executable Jar will be generated inside the $project/build/libs/ folder
 
-# Example CSV structure you want to have
+# CSV structure you want to have
 
 | ApiKey__c | Label | Email__c           | Username__c | DeveloperName |
 |-----------|-------|--------------------|-------------|---------------|
