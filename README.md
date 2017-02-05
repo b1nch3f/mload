@@ -38,3 +38,5 @@
 | A1002     | 2     | max@developer2.com | max2        | X2            |
 
 * Note - DeveloperName and Label are mandatory fields in the CSV file. Other fields also can be mandatory if they are required fields in the Salesforce instance/org.
+
+[![Video](https://i.ytimg.com/vi/S4dRXM_rP-Y/hqdefault.jpg)](https://www.youtube.com/watch?v=S4dRXM_rP-Y)
